@@ -17,4 +17,12 @@
   <servlet-name>EmsDashBoard</servlet-name>
   <url-pattern>/emslist</url-pattern>
 </servlet-mapping>
+<servlet>
+  <servlet-name>EmsCreate</servlet-name>
+  <servlet-class>com.controller.EmsCreate</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>EmsCreate</servlet-name>
+  <url-pattern>/emscreate</url-pattern>
+</servlet-mapping>
 </web-app>

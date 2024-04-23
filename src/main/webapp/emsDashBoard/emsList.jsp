@@ -12,9 +12,12 @@
 <%
 	message=null;
 	}%>
-<h1 class="text-center my-5">EMP LIST</h1>
-<div class="table-responsive">
-<table class="table table-bordered table-hover" >
+	<div class="container clearfix my-5">
+		  <h1 class="float-start">EMP LIST</h1>
+		  <a href="emscreate" class="btn btn-primary float-end">ADD NEW</a>
+	</div>
+<table id="example" class="table table-striped display" cellspacing="0" width="100%">
+	<thead>
 	<tr>
 		<th>ID</th>
 		<th>Name</th>
@@ -29,6 +32,8 @@
 		<th>Address</th>
 		
 	</tr>
+	</thead>
+	<tbody>
 	<%
 	for (EmsDashBoardModel employee : edm.getEmpList()) {
 	%>
@@ -48,6 +53,6 @@
 	<%
 	}
 	%>
+	</tbody>
 </table>
-</div>
 <%@ include file="footer.jsp"%>
