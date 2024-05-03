@@ -1,5 +1,6 @@
 package com.service;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -41,4 +42,25 @@ public class EmsCreateService {
 		}
 		return empCreate;
 	} 
+	public boolean createData(EmsCreateModel ecm)
+	{
+		DatabaseConnectivity dc = DatabaseConnectivity.getInstance();
+		try {
+			String str = "INSERT INTO emp (empname, empdob, empgender, empaddress, empphonenumber, empsalary, empjoindate, emphours, empdepid) VALUES "
+					+ "('"+ecm.getEmpName()+"', '"+ecm.getEmpDob()+"', '"+ecm.getEmpGender()+"', '"+ecm.getEmpAddress()+"', "+ecm.getEmpPhoneNumber()+", "+ecm.getEmpSalary()+", '"+ecm.getEmpJoinDate()+"', "+ecm.getEmpHours()+", "+ecm.getDepId()+")";
+			dc.openConnection();
+			ecm.setEmpId(dc.excuteDataWithId(str));
+			for (int sid : ecm.getSkillId()) {
+				String str2 = "INSERT INTO empskills (empid,skillid) VALUES"+
+							"("+ecm.getEmpId()+","+sid+")";
+				dc.excuteData(str2);
+			}
+
+			dc.closeConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

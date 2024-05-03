@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.DepartmentModel;
 import com.model.EmsCreateModel;
 import com.service.EmsCreateService;
+import com.validator.EmsCreateValidator;
 
 @WebServlet("/EmsCreate")
 public class EmsCreate extends HttpServlet {
@@ -24,7 +24,16 @@ public class EmsCreate extends HttpServlet {
 	    rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		EmsCreateValidator ecv = new EmsCreateValidator();
+		EmsCreateModel ecm = ecv.createFillData(request);
+		EmsCreateService ecs = new EmsCreateService();
+		if(ecs.createData(ecm))
+		{
+			response.sendRedirect("emslist?message=Emp Created Successfully.&type=success");
+		}
+		else
+		{
+			response.sendRedirect("emslist?message=Something went wrong.&type=errorssss");
+		}
 	}
-
 }

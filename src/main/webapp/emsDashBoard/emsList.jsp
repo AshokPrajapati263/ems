@@ -3,15 +3,8 @@
 <%
 	title = "Home";
 	EmsDashBoardModel edm = (EmsDashBoardModel) request.getAttribute("empListModel");
-	String message = request.getParameter("message");
-	if (message != null) {
-	%>
-	<script type="text/javascript">
-		successFun("<%=message%>");
-	</script>
-<%
-	message=null;
-	}%>
+%>
+	
 	<div class="container clearfix my-5">
 		  <h1 class="float-start">EMP LIST</h1>
 		  <a href="emscreate" class="btn btn-primary float-end">ADD NEW</a>

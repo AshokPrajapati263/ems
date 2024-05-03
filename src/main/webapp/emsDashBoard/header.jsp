@@ -8,6 +8,7 @@
 <%
 	String title = null;
 %>
+
 <title>EMS<%=title!=null?" - "+title:""%></title>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -21,6 +22,21 @@
 			  title: "Success",
 			  text: mess,
 			  icon: "success"
+		}).then(function() {
+			var originalURL = document.location.href;
+			var alteredURL = removeParam("message", originalURL);
+			window.location.href = alteredURL;
+		});
+	}
+	const errorFun = (mess) => {
+		Swal.fire({
+			  title: "Error",
+			  text: mess,
+			  icon: "error"
+		}).then(function() {
+			var originalURL = document.location.href;
+			var alteredURL = removeParam("message", originalURL);
+			window.location.href = alteredURL;
 		});
 	}
 </script>
