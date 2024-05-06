@@ -1,16 +1,16 @@
+<%@page import="com.model.EmsEditModel"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.model.SkillsModel"%>
 <%@page import="com.model.DepartmentModel"%>
-<%@page import="com.model.EmsCreateModel"%>
 <%@ include file="header.jsp"%>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.util.Calendar" %>
 
 <%
-title = "Create";
-EmsCreateModel ecm = (EmsCreateModel) request.getAttribute("empCreateModel");
+title = "Edit";
+EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 %>
 
 <%
@@ -21,7 +21,7 @@ EmsCreateModel ecm = (EmsCreateModel) request.getAttribute("empCreateModel");
     String formattedDate = oneMonthLater.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 %>
 <div class="container clearfix my-5">
-	<h1 class="float-start">Create New EMP</h1>
+	<h1 class="float-start">Update EMP</h1>
 	<a href="emslist" class="btn btn-danger mt-auto float-end">Back</a>
 </div>
 <form method="post" action="emscreate" class="row g-3 needs-validation" novalidate>
@@ -73,7 +73,7 @@ EmsCreateModel ecm = (EmsCreateModel) request.getAttribute("empCreateModel");
 		id="Depid" name="empdepid" required class="form-select">
 			<option disabled selected="selected" value="">---Select---</option>
 			<%
-			for (DepartmentModel e : ecm.getDepartments()) {
+			for (DepartmentModel e : eem.getDepartments()) {
 			%>
 			<option value="<%=e.getDepId()%>"><%=e.getDepName()%></option>
 			<%
@@ -89,7 +89,7 @@ EmsCreateModel ecm = (EmsCreateModel) request.getAttribute("empCreateModel");
 					data-bs-toggle="dropdown" aria-expanded="false">---Select---</button>
 				<ul class="dropdown-menu w-100" aria-labelledby="skillsid">
 					<%
-					for (SkillsModel s : ecm.getSkills()) {
+					for (SkillsModel s : eem.getSkills()) {
 					%>
 					<li class="ps-2"><label for="<%=s.getSkillName()%>"><input
 							name="skillsid" id="<%=s.getSkillName()%>" type="checkbox"
@@ -102,7 +102,7 @@ EmsCreateModel ecm = (EmsCreateModel) request.getAttribute("empCreateModel");
 		</div>
 		<div
 			class="col-md-6 mb-5 d-md-flex align-self-end justify-content-end">
-			<button type="submit" class="btn btn-primary w-25">Create</button>
+			<button type="submit" class="btn btn-primary w-25">Update</button>
 		</div>
 	</div>
 </form>

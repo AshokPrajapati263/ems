@@ -1,6 +1,5 @@
 package com.service;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -13,6 +12,7 @@ import com.model.SkillsModel;
 import DBconnection.DatabaseConnectivity;
 
 public class EmsCreateService {
+	
 	public EmsCreateModel getDepartmentsAndSkills(){
 		DatabaseConnectivity dc = DatabaseConnectivity.getInstance();
 		EmsCreateModel empCreate = new EmsCreateModel();

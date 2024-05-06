@@ -2,7 +2,7 @@ package com.model;
 
 import java.util.List;
 
-public class EmsCreateModel {
+public class EmsEditModel {
 	private int empId; 
 	private String empName; 
 	private String empDob; 

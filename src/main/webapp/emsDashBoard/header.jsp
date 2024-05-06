@@ -40,6 +40,11 @@
 		});
 	}
 </script>
+<style>
+	textarea {
+    	resize: none;
+	}
+</style>
 </head>
 <body>
 <div class="container">

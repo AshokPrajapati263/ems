@@ -25,4 +25,12 @@
   <servlet-name>EmsCreate</servlet-name>
   <url-pattern>/emscreate</url-pattern>
 </servlet-mapping>
+<servlet>
+  <servlet-name>EmsEdit</servlet-name>
+  <servlet-class>com.controller.EmsEdit</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>EmsEdit</servlet-name>
+  <url-pattern>/emsedit</url-pattern>
+</servlet-mapping>
 </web-app>

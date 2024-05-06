@@ -59,6 +59,17 @@ String type = request.getParameter("type");
 	        }
 	    });
 	});
+  $( document ).ready(function() {
+		var text_max = 500;
+		$('#count_message').html('0 / ' + text_max );
+
+		$('#Address').keyup(function() {
+		  var text_length = $('#Address').val().length;
+		  var text_remaining = text_max - text_length;
+		  
+		  $('#count_message').html(text_length + ' / ' + text_max);
+		});
+	});
   </script>
 </body>
 </html>
