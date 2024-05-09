@@ -28,7 +28,7 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 	<div class="col-md-6">
 		<label for="EMPName" class="form-label">EMP Name</label> <input
 			type="text" name="empname" class="form-control"
-			placeholder="John Due" id="EMPName" required>
+			placeholder="John Due" id="EMPName" value="<%=eem.getEmpName()%>" required>
 	</div>
 	<div class="col-md-6">
 		<label for="Salary" class="form-label">Salary</label> <input

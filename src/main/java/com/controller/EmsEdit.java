@@ -17,7 +17,7 @@ public class EmsEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmsEditService ees = new EmsEditService();
-		EmsEditModel eem =  ees.getEmp();
+		EmsEditModel eem =  ees.getEmp(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("empEditModel", eem);
 		RequestDispatcher rd = request.getRequestDispatcher("emsDashBoard/edit.jsp");
 	    rd.forward(request, response);

@@ -23,7 +23,7 @@
 		<th>JoinDate</th>
 		<th>PhoneNumber</th>
 		<th>Address</th>
-		
+		<th>Action</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -42,6 +42,7 @@
 		<td><%=employee.getEmpJoinDate()%></td>
 		<td><%=employee.getEmpPhoneNumber()%></td>
 		<td><%=employee.getEmpAddress()%></td>
+		<td><a href="emsedit?id=<%=employee.getEmpId()%>">edit</a></td>
 	</tr>
 	<%
 	}
