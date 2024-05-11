@@ -60,11 +60,16 @@ String type = request.getParameter("type");
 	    });
 	});
   $( document ).ready(function() {
-		var text_max = 500;
-		$('#count_message').html('0 / ' + text_max );
+	  var text_length;
+	  var text_max = 500;
+	  	if($('#Address').length)
+		 {
+		  	text_length = $('#Address').val().length!=0?$('#Address').val().length:0;
+		  	$('#count_message').html(text_length + ' / ' + text_max);
+		  }
 
 		$('#Address').keyup(function() {
-		  var text_length = $('#Address').val().length;
+		  text_length = $('#Address').val().length;
 		  var text_remaining = text_max - text_length;
 		  
 		  $('#count_message').html(text_length + ' / ' + text_max);

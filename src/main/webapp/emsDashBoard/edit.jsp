@@ -1,3 +1,4 @@
+<%@page import="java.util.Arrays"%>
 <%@page import="com.model.EmsEditModel"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -32,41 +33,41 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 	</div>
 	<div class="col-md-6">
 		<label for="Salary" class="form-label">Salary</label> <input
-			type="number" name="empsalary" class="form-control"
+			value="<%=eem.getEmpSalary()%>" type="number" name="empsalary" class="form-control"
 			placeholder="20000" id="Salary" required>
 	</div>
 	<div class="col-12">
 		<label for="Address" class="form-label">Address</label>
 		<textarea maxlength="500" class="form-control" name="empaddress" id="Address"
-			placeholder="1234 Main St" required></textarea>
+			placeholder="1234 Main St" required><%=eem.getEmpAddress()%></textarea>
 		<span class="label" id="count_message"></span>
 	</div>
 	<div class="col-md-6">
 		<label for="DOB" class="form-label">Date Of Birth</label> <input
-			type="date" min="1960-01-01" max="<%= dateMinus18Years %>" name="empdob" class="form-control" id="DOB" required>
+			type="date" min="1960-01-01" max="<%= dateMinus18Years %>" value="<%=eem.getEmpDob()%>" name="empdob" class="form-control" id="DOB" required>
 	</div>
 	<div class="col-md-2">
 		<label for="Gender" class="form-label">Gender</label> <select
 			id="Gender" name="empgender" class="form-select" required>
-			<option disabled selected="selected" value="">---Select---</option>
-			<option>Male</option>
-			<option>Female</option>
-			<option>Other</option>
+			<option disabled value="">---Select---</option>
+			<option <%=eem.getEmpGender().trim().equals("Male")?"selected='selected'":""%> >Male</option>
+			<option <%=eem.getEmpGender().trim().equals("Female")?"selected='selected'":""%> >Female</option>
+			<option <%=eem.getEmpGender().trim().equals("Other")?"selected='selected'":""%> >Other</option>
 		</select>
 	</div>
 	<div class="col-md-4">
 		<label for="EMPPhoneNO" class="form-label">EMP PhoneNO</label> <input
-			type="text" maxlength="10" pattern="^\d{10}$" name="empphonenumber" class="form-control" required
+			type="text" maxlength="10" pattern="^\d{10}$" value="<%=eem.getEmpPhoneNumber()%>" name="empphonenumber" class="form-control" required
 			id="EMPPhoneNO">
 	</div>
 	<div class="col-md-6">
 		<label for="JDate" class="form-label">Joining Date</label> <input
-			type="datetime-local" min="2000-01-01 00:00:00" max="<%= formattedDate %>" name="empjoindate" class="form-control"
+			type="datetime-local" min="2000-01-01 00:00:00" value="<%=eem.getEmpJoinDate()%>" max="<%= formattedDate %>" name="empjoindate" class="form-control"
 			required id="JDate">
 	</div>
 	<div class="col-md-2">
 		<label for="WH" class="form-label">Working Hours</label> <input
-			type="number" min="4" max="12" class="form-control" name="emphours" required id="WH">
+			type="number" min="4" max="12" class="form-control" value="<%=eem.getEmpHours()%>" name="emphours" required id="WH">
 	</div>
 	<div class="col-md-4">
 		<label for="Depid" class="form-label">Department</label> <select
@@ -75,7 +76,7 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 			<%
 			for (DepartmentModel e : eem.getDepartments()) {
 			%>
-			<option value="<%=e.getDepId()%>"><%=e.getDepName()%></option>
+			<option <%=e.getDepId()==eem.getDepId()?"selected='selected'":"" %> value="<%=e.getDepId()%>"><%=e.getDepName()%></option>
 			<%
 			}
 			%>
@@ -92,8 +93,10 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 					for (SkillsModel s : eem.getSkills()) {
 					%>
 					<li class="ps-2"><label for="<%=s.getSkillName()%>"><input
+							<%=Arrays.stream(eem.getSkillId()).anyMatch(id -> id == s.getSkillId())?"checked":""%>
 							name="skillsid" id="<%=s.getSkillName()%>" type="checkbox"
 							value="<%=s.getSkillId()%>"> <%=s.getSkillName()%></label></li>
+							
 					<%
 					}
 					%>
@@ -133,8 +136,39 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
   				dropdownButton.classList.add("is-invalid");
   			}
         } 
+        function handleCBNew(checkbox) { 
+            if (checkbox.checked) { 
+                mySelectedItems.push(checkbox.id); 
+            } else { 
+                mySelectedItems =  
+                  mySelectedItems.filter((item) => item !== checkbox.id); 
+            } 
+  			if(mySelectedItems.length > 0)
+  			{
+  				dropdownButton.innerText = mySelectedItems.join(', ');
+  			}
+  			else
+  			{
+  				dropdownButton.innerText = '---Select---';
+  			}
+        } 
   
         dropdownMenu.addEventListener('change', handleCB); 
+        
+        
+        if (document.readyState === 'complete') {
+        	  const checkboxes = document.querySelectorAll('.dropdown input[type="checkbox"]');
+        	  for (const checkbox of checkboxes) {
+        	    handleCBNew(checkbox); 
+        	  }
+        	} else {
+        	  document.addEventListener('DOMContentLoaded', function() {
+        	    const checkboxes = document.querySelectorAll('.dropdown input[type="checkbox"]');
+        	    for (const checkbox of checkboxes) {
+        	      handleCBNew(checkbox);
+        	    }
+        	  });
+        	}
 </script>
 <script> 
 //Example starter JavaScript for disabling form submissions if there are invalid fields
