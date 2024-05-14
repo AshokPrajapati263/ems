@@ -75,6 +75,28 @@ String type = request.getParameter("type");
 		  $('#count_message').html(text_length + ' / ' + text_max);
 		});
 	});
+  function deleteCall(callId) {
+		Swal.fire({
+		    title: 'Are you sure?',
+		    text: "You won't be able to revert this!",
+		    icon: 'warning',
+		    showCancelButton: true,
+		    confirmButtonColor: '#3085d6',
+		    cancelButtonColor: '#d33',
+		    confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+		    if (result.isConfirmed) {
+		    	$.ajax({
+		    	    url: "emsedit?id="+callId, 
+		    	    type: "DELETE", 
+		    	    data: { id: callId },
+		            success: function (data) {
+		            	window.location.href = "<%= request.getContextPath() %>/"+data;
+		            }
+		        })
+		    }
+		})
+	}
   </script>
 </body>
 </html>

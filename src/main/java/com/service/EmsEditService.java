@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.model.DepartmentModel;
-import com.model.EmsDashBoardModel;
 import com.model.EmsEditModel;
 import com.model.SkillsModel;
 
@@ -72,4 +71,29 @@ public class EmsEditService {
 		}
 		return empEdit;
 	} 
+	public boolean updateData(EmsEditModel eem,int id)
+	{
+		DatabaseConnectivity dc = DatabaseConnectivity.getInstance();
+		try {
+			String str = "UPDATE emp SET empname='"+eem.getEmpName()+"', empdob='"+eem.getEmpDob()+"', empgender='"+eem.getEmpGender()+"', empaddress='"+eem.getEmpAddress()+"', empphonenumber="+eem.getEmpPhoneNumber()+", empsalary="+eem.getEmpSalary()+", empjoindate='"+eem.getEmpJoinDate()+"', emphours="+eem.getEmpHours()+", empdepid="+eem.getDepId()+" WHERE empid="+id+"";
+			dc.openConnection();
+			dc.excuteData(str);
+			String strDel = "DELETE FROM empskills where empid="+id+"";
+			dc.excuteData(strDel);
+			for (int sid : eem.getSkillId()) {
+				String str2 = "INSERT INTO empskills (empid,skillid) VALUES"+
+							"("+id+","+sid+")";
+				dc.excuteData(str2);
+			}
+			dc.closeConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public boolean deleteData(int id)
+	{
+		return true;
+	}
 }

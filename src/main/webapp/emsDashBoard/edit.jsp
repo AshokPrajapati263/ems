@@ -25,7 +25,8 @@ EmsEditModel eem = (EmsEditModel) request.getAttribute("empEditModel");
 	<h1 class="float-start">Update EMP</h1>
 	<a href="emslist" class="btn btn-danger mt-auto float-end">Back</a>
 </div>
-<form method="post" action="emscreate" class="row g-3 needs-validation" novalidate>
+<form method="post" action="emsedit" class="row g-3 needs-validation" novalidate>
+	<input type="hidden" name="id" value="<%=eem.getEmpId()%>">
 	<div class="col-md-6">
 		<label for="EMPName" class="form-label">EMP Name</label> <input
 			type="text" name="empname" class="form-control"

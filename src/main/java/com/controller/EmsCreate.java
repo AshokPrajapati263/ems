@@ -33,7 +33,7 @@ public class EmsCreate extends HttpServlet {
 		}
 		else
 		{
-			response.sendRedirect("emslist?message=Something went wrong.&type=errorssss");
+			response.sendRedirect("emslist?message=Something went wrong.&type=error");
 		}
 	}
 }
