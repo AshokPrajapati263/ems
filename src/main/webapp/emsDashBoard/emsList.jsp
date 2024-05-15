@@ -42,7 +42,7 @@
 		<td><%=employee.getEmpJoinDate()%></td>
 		<td><%=employee.getEmpPhoneNumber()%></td>
 		<td><%=employee.getEmpAddress()%></td>
-		<td><a href="emsedit?id=<%=employee.getEmpId()%>">Edit</a><br><button onclick="deleteCall(<%=employee.getEmpId()%>)">Delete</button></td>
+		<td width="12%"><a class="btn btn-warning me-2" href="emsedit?id=<%=employee.getEmpId()%>">Edit</a><button class="btn btn-danger" onclick="deleteCall(<%=employee.getEmpId()%>)">Delete</button></td>
 	</tr>
 	<%
 	}

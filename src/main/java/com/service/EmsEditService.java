@@ -94,6 +94,18 @@ public class EmsEditService {
 	}
 	public boolean deleteData(int id)
 	{
+		DatabaseConnectivity dc = DatabaseConnectivity.getInstance();
+		try {
+			String strDel = "DELETE FROM empskills where empid="+id+"";
+			dc.openConnection();
+			dc.excuteData(strDel);
+			String str = "DELETE FROM emp where empid="+id+"";
+			dc.excuteData(str);			
+			dc.closeConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 }
